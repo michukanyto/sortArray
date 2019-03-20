@@ -11,10 +11,11 @@ import UIKit
 class ViewController: UIViewController {
 
     var numbers:[Int] = [0,0,0,0,0]
-    var result:[Int] = [0,0,0,0,0]
+//    var result:[Int] = [0,0,0,0,0]
     
     var textFields:[UITextField] = [];
-    var textFieldsResult:[UITextField] = [];
+    var textFieldsDecrease:[UITextField] = [];
+    var textFieldsIncrease:[UITextField] = [];
     
     
     
@@ -24,11 +25,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var n3TextView: UITextField!
     @IBOutlet weak var n4TextView: UITextField!
     @IBOutlet weak var n5TextView: UITextField!
-    @IBOutlet weak var n1ResultTextView: UITextField!
-    @IBOutlet weak var n2ResultTextView: UITextField!
-    @IBOutlet weak var n3ResultTextView: UITextField!
-    @IBOutlet weak var n4ResultTextView: UITextField!
-    @IBOutlet weak var n5ResultTextView: UITextField!
+    @IBOutlet weak var n1DecreaseTextView: UITextField!
+    @IBOutlet weak var n2DecreaseTextView: UITextField!
+    @IBOutlet weak var n3DecreaseTextView: UITextField!
+    @IBOutlet weak var n4DecreaseTextView: UITextField!
+    @IBOutlet weak var n5DecreaseTextView: UITextField!
+    @IBOutlet weak var n1IncreaseTextView: UITextField!
+    @IBOutlet weak var n2IncreaseTextView: UITextField!
+    @IBOutlet weak var n3IncreaseTextView: UITextField!
+    @IBOutlet weak var n4IncreaseTextView: UITextField!
+    @IBOutlet weak var n5IncreaseTextView: UITextField!
+    
+    
+    
     
     
     override func viewDidLoad() {
@@ -39,31 +48,28 @@ class ViewController: UIViewController {
         textFields.append(n3TextView)
         textFields.append(n4TextView)
         textFields.append(n5TextView)
-        textFieldsResult.append(n1ResultTextView)
-        textFieldsResult.append(n2ResultTextView)
-        textFieldsResult.append(n3ResultTextView)
-        textFieldsResult.append(n4ResultTextView)
-        textFieldsResult.append(n5ResultTextView)
+        textFieldsDecrease.append(n1DecreaseTextView)
+        textFieldsDecrease.append(n2DecreaseTextView)
+        textFieldsDecrease.append(n3DecreaseTextView)
+        textFieldsDecrease.append(n4DecreaseTextView)
+        textFieldsDecrease.append(n5DecreaseTextView)
+        textFieldsIncrease.append(n1IncreaseTextView)
+        textFieldsIncrease.append(n2IncreaseTextView)
+        textFieldsIncrease.append(n3IncreaseTextView)
+        textFieldsIncrease.append(n4IncreaseTextView)
+        textFieldsIncrease.append(n5IncreaseTextView)
+        
+        
         initialize()
     }
     
     func initialize(){
         for i in 0...4{
             textFields[i].text = ""
-            textFieldsResult[i].text = "0"
+            textFieldsDecrease[i].text = ""
+            textFieldsIncrease[i].text = ""
         }
-        
-        
-//        n1TextView.text = "0"
-//        n2TextView.text = "0"
-//        n3TextView.text = "0"
-//        n4TextView.text = "0"
-//        n5TextView.text = "0"
-//        n1ResultTextView.text = "0"
-//        n2ResultTextView.text = "0"
-//        n3ResultTextView.text = "0"
-//        n4ResultTextView.text = "0"
-//        n5ResultTextView.text = "0"
+ 
     }
 
 
@@ -73,34 +79,24 @@ class ViewController: UIViewController {
             numbers[i] = Int(textFields[i].text!)!
         }
         
-        result = sortDecrease(arr: numbers)
+        let (decreaseArray,increaseArray) = sortDecrease(arr: numbers)
         
         for i in 0...4{
-            textFieldsResult[i].text =  "\(result[i])"
+            textFieldsDecrease[i].text =  "\(decreaseArray[i])"
+            textFieldsIncrease[i].text =  "\(increaseArray[i])"
         }
-        
-//
-//        numbers[0] = Int(n1TextView.text!)!
-//        numbers[1] = Int(n2TextView.text!)!
-//        numbers[2] = Int(n3TextView.text!)!
-//        numbers[3] = Int(n4TextView.text!)!
-//        numbers[4] = Int(n5TextView.text!)!
-//
-//
-//        n1ResultTextView.text = "\(result[0])"
-//        n2ResultTextView.text = "\(result[1])"
-//        n3ResultTextView.text = "\(result[2])"
-//        n4ResultTextView.text = "\(result[3])"
-//        n5ResultTextView.text = "\(result[4])"
         
     }
     
     
-    func sortDecrease(arr:[Int]) -> [Int]{
-        var newArray1 = [Int]()
-        newArray1 = arr
-        newArray1.sort(by : >)
-        return newArray1
+    func sortDecrease(arr:[Int]) -> ([Int],[Int]){
+        var newArrayDecrease = [Int]()
+        var newArrayIncrease = [Int]()
+        newArrayDecrease = arr
+        newArrayIncrease = arr
+        newArrayDecrease.sort(by : >)
+        newArrayIncrease.sort()
+        return (newArrayDecrease,newArrayIncrease)
     }
  
     @IBAction func exitButtonPressed(_ sender: UIButton) {
